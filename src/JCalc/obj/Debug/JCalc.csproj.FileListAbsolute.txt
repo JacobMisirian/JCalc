@@ -1,0 +1,6 @@
+c:\users\reagan\JCalc\JCalc\bin\Debug\JCalc.exe.config
+c:\users\reagan\JCalc\JCalc\bin\Debug\JCalc.exe
+c:\users\reagan\JCalc\JCalc\bin\Debug\JCalc.pdb
+c:\users\reagan\JCalc\JCalc\obj\Debug\JCalc.csprojResolveAssemblyReference.cache
+c:\users\reagan\JCalc\JCalc\obj\Debug\JCalc.exe
+c:\users\reagan\JCalc\JCalc\obj\Debug\JCalc.pdb
