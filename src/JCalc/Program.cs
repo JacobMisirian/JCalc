@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace JCalc
                     string input = Console.ReadLine();
                     interpreter.Execute(new Parser.Parser(new Lexer.Lexer(input).Scan()).Parse());
                 }
+            else
+                interpreter.Execute(new Parser.Parser(new Lexer.Lexer(File.ReadAllText(args[0])).Scan()).Parse());
         }
     }
 }
