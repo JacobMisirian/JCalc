@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,19 +16,34 @@ namespace JCalc.Interpreter
         private int position = 0;
         private AstNode code { get; set; }
         private Stack stack = new Stack();
-        public Dictionary<string, object> Variables = new Dictionary<string, object>();
-
-        public Interpreter()
+        public Dictionary<string, object> Variables = new Dictionary<string, object>()
         {
-        }
+            {"True", true },
+            {"False", false },
+            {"Pi", Math.PI }
+        };
 
-        public void Execute(AstNode ast)
+        public Interpreter(AstNode ast = null)
         {
             code = ast;
+            foreach (Dictionary<string, InternalFunction> entries in getFunctions())
+                foreach (KeyValuePair<string, InternalFunction> entry in entries)
+                    Variables.Add(entry.Key, entry.Value);
+        }
+
+        public void Execute(AstNode ast = null, bool displayLastCalculation = true)
+        {
+            code = (ast == null) ? code : ast;
             for (position = 0; position < code.Children.Count; position++)
                 executeStatement(code.Children[position]);
 
-            Console.WriteLine(stack.Peek());
+            if (displayLastCalculation)
+                try
+                {
+                    Console.WriteLine(stack.Peek());
+                }
+                catch
+                { }
         }
 
         private void executeStatement(AstNode node)
@@ -61,6 +77,19 @@ namespace JCalc.Interpreter
             else if (node is UnaryOpNode)
             {
                 var ret = interpretUnaryOperation((UnaryOpNode)node);
+                stack.Push(ret);
+                return ret;
+            }
+            else if (node is FunctionCallNode)
+            {
+                FunctionCallNode fnode = (FunctionCallNode)node;
+                IFunction target = evaluateNode(fnode.Target) as IFunction;
+                if (target == null)
+                    throw new Exception("Attempt to run a non-valid function!");
+                object[] arguments = new object[fnode.Arguments.Children.Count];
+                for (int x = 0; x < fnode.Arguments.Children.Count; x++)
+                    arguments[x] = evaluateNode(fnode.Arguments.Children[x]);
+                var ret = target.Invoke(arguments);
                 stack.Push(ret);
                 return ret;
             }
@@ -124,6 +153,26 @@ namespace JCalc.Interpreter
                 default:
                     throw new Exception("Unknown unary operation " + node.UnaryOperation);
             }
+        }
+
+        private List<Dictionary<string, InternalFunction>> getFunctions(string path = "")
+        {
+            List<Dictionary<string, InternalFunction>> result = new List<Dictionary<string, InternalFunction>>();
+            Assembly testAss;
+
+            if (path != "")
+                testAss = Assembly.LoadFrom(path);
+            else
+                testAss = Assembly.GetExecutingAssembly();
+
+            foreach (Type type in testAss.GetTypes())
+                if (type.GetInterface(typeof(ILibrary).FullName) != null)
+                {
+                    ILibrary ilib = (ILibrary)Activator.CreateInstance(type);
+                    result.Add(ilib.GetFunctions());
+                }
+
+            return result;
         }
     }
 }

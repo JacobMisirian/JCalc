@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interpreter\Functions\StandardLibrary.cs" />
+    <Compile Include="Interpreter\IFunction.cs" />
+    <Compile Include="Interpreter\ILibrary.cs" />
+    <Compile Include="Interpreter\InternalFunction.cs" />
     <Compile Include="Interpreter\Interpreter.cs" />
     <Compile Include="Lexer\Lexer.cs" />
     <Compile Include="Lexer\Token.cs" />
