@@ -69,10 +69,6 @@ namespace JCalc.Parser.Nodes
                         parser.AcceptToken(TokenType.Operation);
                         left = new BinaryOpNode(BinaryOperation.Modulus, left, parseComparison(parser));
                         continue;
-                    case "=":
-                        parser.AcceptToken(TokenType.Assignment);
-                        left = new BinaryOpNode(BinaryOperation.Assignment, left, parseComparison(parser));
-                        continue;
                     default:
                         break;
                 }
@@ -95,6 +91,22 @@ namespace JCalc.Parser.Nodes
                     case "<":
                         parser.AcceptToken(TokenType.Comparison);
                         left = new BinaryOpNode(BinaryOperation.LessThan, left, parseFunctionCall(parser));
+                        continue;
+                    case ">=":
+                        parser.AcceptToken(TokenType.Comparison);
+                        left = new BinaryOpNode(BinaryOperation.GreaterThanOrEqual, left, parseFunctionCall(parser));
+                        continue;
+                    case "<=":
+                        parser.AcceptToken(TokenType.Comparison);
+                        left = new BinaryOpNode(BinaryOperation.LesserThanOrEqual, left, parseFunctionCall(parser));
+                        continue;
+                    case "=":
+                        parser.AcceptToken(TokenType.Comparison);
+                        left = new BinaryOpNode(BinaryOperation.Equals, left, parseFunctionCall(parser));
+                        continue;
+                    case "!=":
+                        parser.AcceptToken(TokenType.Comparison);
+                        left = new BinaryOpNode(BinaryOperation.Not, left, parseFunctionCall(parser));
                         continue;
                     default:
                         break;
@@ -120,6 +132,8 @@ namespace JCalc.Parser.Nodes
         {
             if (parser.MatchToken(TokenType.String))
                 return new StringNode(parser.ExpectToken(TokenType.String).Value);
+            else if (parser.AcceptToken(TokenType.Comparison, "!"))
+                return new UnaryOpNode(UnaryOperation.Not, ExpressionNode.Parse(parser));
             else if (parser.MatchToken(TokenType.Number))
                 return new NumberNode(Convert.ToInt32(parser.ExpectToken(TokenType.Number).Value));
             else if (parser.AcceptToken(TokenType.Parentheses, "("))

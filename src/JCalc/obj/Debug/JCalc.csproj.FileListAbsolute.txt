@@ -4,3 +4,9 @@ c:\users\reagan\JCalc\JCalc\bin\Debug\JCalc.pdb
 c:\users\reagan\JCalc\JCalc\obj\Debug\JCalc.csprojResolveAssemblyReference.cache
 c:\users\reagan\JCalc\JCalc\obj\Debug\JCalc.exe
 c:\users\reagan\JCalc\JCalc\obj\Debug\JCalc.pdb
+C:\Users\Reagan\JCalc\src\JCalc\bin\Debug\JCalc.exe.config
+C:\Users\Reagan\JCalc\src\JCalc\obj\Debug\JCalc.exe
+C:\Users\Reagan\JCalc\src\JCalc\obj\Debug\JCalc.pdb
+C:\Users\Reagan\JCalc\src\JCalc\bin\Debug\JCalc.exe
+C:\Users\Reagan\JCalc\src\JCalc\bin\Debug\JCalc.pdb
+C:\Users\Reagan\JCalc\src\JCalc\obj\Debug\JCalc.csprojResolveAssemblyReference.cache

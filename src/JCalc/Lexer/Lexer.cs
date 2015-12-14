@@ -50,6 +50,30 @@ namespace JCalc.Lexer
                         case ")":
                             result.Add(new Token(TokenType.Parentheses, readLetter));
                             break;
+                        case ">":
+                            readChar();
+                            if (peekLetter == "=")
+                                result.Add(new Token(TokenType.Comparison, ">" + readLetter));
+                            else
+                                result.Add(new Token(TokenType.Comparison, ">"));
+                            break;
+                        case "<":
+                            readChar();
+                            if (peekLetter == "=")
+                                result.Add(new Token(TokenType.Comparison, "<" + readLetter));
+                            else
+                                result.Add(new Token(TokenType.Comparison, "<"));
+                            break;
+                        case "=":
+                            result.Add(new Token(TokenType.Comparison, readLetter));
+                            break;
+                        case "!":
+                            readChar();
+                            if (peekLetter == "=")
+                                result.Add(new Token(TokenType.Comparison, "!" + readLetter));
+                            else
+                                result.Add(new Token(TokenType.Comparison, "!"));
+                            break;
                         default:
                             Console.WriteLine("Unknown token " + readLetter);
                             break;

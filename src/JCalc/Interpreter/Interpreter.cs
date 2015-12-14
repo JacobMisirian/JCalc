@@ -58,6 +58,12 @@ namespace JCalc.Interpreter
                 stack.Push(ret);
                 return ret;
             }
+            else if (node is UnaryOpNode)
+            {
+                var ret = interpretUnaryOperation((UnaryOpNode)node);
+                stack.Push(ret);
+                return ret;
+            }
             else
                 throw new Exception("Unknown node " + node.ToString() + "  " + node.GetType());
         }
@@ -94,12 +100,29 @@ namespace JCalc.Interpreter
                     return Convert.ToDouble(evaluateNode(node.Left)) % Convert.ToDouble(evaluateNode(node.Right));
                 case BinaryOperation.Equals:
                     return evaluateNode(node.Left).GetHashCode() == evaluateNode(node.Right).GetHashCode();
+                case BinaryOperation.Not:
+                    return evaluateNode(node.Left).GetHashCode() != evaluateNode(node.Right).GetHashCode();
                 case BinaryOperation.LessThan:
                     return Convert.ToDouble(evaluateNode(node.Left)) < Convert.ToDouble(evaluateNode(node.Right));
                 case BinaryOperation.GreaterThan:
                     return Convert.ToDouble(evaluateNode(node.Left)) > Convert.ToDouble(evaluateNode(node.Right));
+                case BinaryOperation.GreaterThanOrEqual:
+                    return Convert.ToDouble(evaluateNode(node.Left)) >= Convert.ToDouble(evaluateNode(node.Right));
+                case BinaryOperation.LesserThanOrEqual:
+                    return Convert.ToDouble(evaluateNode(node.Left)) <= Convert.ToDouble(evaluateNode(node.Right));
                 default:
                     throw new Exception("Unknown binary operation " + node.BinaryOperation);
+            }
+        }
+
+        private object interpretUnaryOperation(UnaryOpNode node)
+        {
+            switch (node.UnaryOperation)
+            {
+                case UnaryOperation.Not:
+                    return !(Convert.ToBoolean(evaluateNode(node.Target)));
+                default:
+                    throw new Exception("Unknown unary operation " + node.UnaryOperation);
             }
         }
     }

@@ -12,12 +12,14 @@ namespace JCalc
     {
         static void Main(string[] args)
         {
-            Interpreter.Interpreter interpreter = new Interpreter.Interpreter();   
-            while (true)
-            {
-                string input = Console.ReadLine();
-                interpreter.Execute(new Parser.Parser(new Lexer.Lexer(input).Scan()).Parse());
-            }
+            Interpreter.Interpreter interpreter = new Interpreter.Interpreter();
+
+            if (args.Length <= 0)
+                while (true)
+                {
+                    string input = Console.ReadLine();
+                    interpreter.Execute(new Parser.Parser(new Lexer.Lexer(input).Scan()).Parse());
+                }
         }
     }
 }

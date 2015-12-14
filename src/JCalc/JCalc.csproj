@@ -55,6 +55,7 @@
     <Compile Include="Parser\Nodes\IdentifierNode.cs" />
     <Compile Include="Parser\Nodes\NumberNode.cs" />
     <Compile Include="Parser\Nodes\StringNode.cs" />
+    <Compile Include="Parser\Nodes\UnaryOpNode.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
