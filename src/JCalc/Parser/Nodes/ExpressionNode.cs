@@ -122,8 +122,12 @@ namespace JCalc.Parser.Nodes
         }
         private static AstNode parseFunctionCall(Parser parser, AstNode left)
         {
-            if (parser.MatchToken(TokenType.Parentheses, "("))
-                return parseFunctionCall(parser, new FunctionCallNode(left, ArgListNode.Parse(parser)));
+            if (parser.AcceptToken(TokenType.Parentheses, "("))
+            {
+                var ret = parseFunctionCall(parser, new FunctionCallNode(left, ArgListNode.Parse(parser)));
+                parser.ExpectToken(TokenType.Parentheses, ")");
+                return ret;
+            }
             else
                 return left;
         }

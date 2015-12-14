@@ -44,6 +44,10 @@ namespace JCalc.Interpreter
                 }
                 catch
                 { }
+
+
+            for (int x = 0; x < stack.Count; x++)
+                stack.Pop();
         }
 
         private void executeStatement(AstNode node)
@@ -51,11 +55,29 @@ namespace JCalc.Interpreter
             if (node is CodeBlockNode)
                 foreach (AstNode cnode in node.Children)
                     executeStatement(cnode);
+            else if (node is DispNode)
+            {
+                foreach (AstNode cnode in node.Children[0].Children)
+                    Console.Write(evaluateNode(cnode, false));
+               Console.WriteLine();
+            }
+            else if (node is InputNode)
+            {
+                foreach (AstNode cnode in node.Children[0].Children)
+                {
+                    if (!(cnode is IdentifierNode))
+                        throw new Exception("Identifier variables must follow Input");
+                    IdentifierNode inode = (IdentifierNode)cnode;
+                    if (Variables.ContainsKey(inode.Identifier))
+                        Variables.Remove(inode.Identifier);
+                    Variables.Add(inode.Identifier, Console.ReadLine());
+                }
+            }
             else
                 evaluateNode(node);
         }
 
-        private object evaluateNode(AstNode node)
+        private object evaluateNode(AstNode node, bool pushToStack = true)
         {
             if (node is IdentifierNode)
             {
@@ -71,13 +93,13 @@ namespace JCalc.Interpreter
             else if (node is BinaryOpNode)
             {
                 var ret = interpretBinaryOperation((BinaryOpNode)node);
-                stack.Push(ret);
+                push(ret, pushToStack);
                 return ret;
             }
             else if (node is UnaryOpNode)
             {
                 var ret = interpretUnaryOperation((UnaryOpNode)node);
-                stack.Push(ret);
+                push(ret, pushToStack);
                 return ret;
             }
             else if (node is FunctionCallNode)
@@ -90,11 +112,17 @@ namespace JCalc.Interpreter
                 for (int x = 0; x < fnode.Arguments.Children.Count; x++)
                     arguments[x] = evaluateNode(fnode.Arguments.Children[x]);
                 var ret = target.Invoke(arguments);
-                stack.Push(ret);
+                push(ret, pushToStack);
                 return ret;
             }
             else
                 throw new Exception("Unknown node " + node.ToString() + "  " + node.GetType());
+        }
+
+        private void push (object value, bool pushToStack = true)
+        {
+            if (pushToStack)
+                stack.Push(value);
         }
 
         private object interpretBinaryOperation(BinaryOpNode node)
@@ -116,7 +144,7 @@ namespace JCalc.Interpreter
                     object addLeft = evaluateNode(node.Left);
                     object addRight = evaluateNode(node.Right);
                     if (addLeft is string || addRight is string)
-                        return (string)addLeft + (string)addRight;
+                        return addLeft.ToString() + addRight.ToString();
                     else
                         return Convert.ToDouble(addLeft) + Convert.ToDouble(addRight);
                 case BinaryOperation.Subtraction:

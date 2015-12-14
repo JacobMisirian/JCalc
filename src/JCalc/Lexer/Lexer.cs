@@ -30,6 +30,9 @@ namespace JCalc.Lexer
                 else
                     switch (peekLetter)
                     {
+                        case ",":
+                            result.Add(new Token(TokenType.Comma, readLetter));
+                            break;
                         case "\"":
                             result.Add(scanString());
                             break;
@@ -89,6 +92,7 @@ namespace JCalc.Lexer
             readChar();
             while (peekChar() != -1 && peekLetter != "\"")
                 res += readLetter;
+            readChar();
             return new Token(TokenType.String, res);
         }
 
