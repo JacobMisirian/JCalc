@@ -60,7 +60,7 @@ namespace JCalc.Interpreter
             {
                 foreach (AstNode cnode in node.Children[0].Children)
                     Console.Write(evaluateNode(cnode, false));
-               Console.WriteLine();
+                Console.WriteLine();
             }
             else if (node is InputNode)
             {
@@ -103,6 +103,8 @@ namespace JCalc.Interpreter
                     }
                 }
             }
+            else if (node is StopNode)
+                Environment.Exit(0);
             else
                 evaluateNode(node);
         }

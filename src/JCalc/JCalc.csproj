@@ -48,6 +48,7 @@
     <Compile Include="Interpreter\ILibrary.cs" />
     <Compile Include="Interpreter\InternalFunction.cs" />
     <Compile Include="Interpreter\Interpreter.cs" />
+    <Compile Include="JCalcEngine.cs" />
     <Compile Include="Lexer\Lexer.cs" />
     <Compile Include="Lexer\Token.cs" />
     <Compile Include="Parser\AstNode.cs" />
@@ -72,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parser\Nodes\StatementNode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Parser\Nodes\StopNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

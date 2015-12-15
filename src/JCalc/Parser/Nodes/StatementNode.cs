@@ -18,6 +18,8 @@ namespace JCalc.Parser.Nodes
                 return new InputNode(ArgListNode.Parse(parser));
             else if (parser.AcceptToken(TokenType.Identifier, "Prompt"))
                 return new PromptNode(ArgListNode.Parse(parser));
+            else if (parser.AcceptToken(TokenType.Identifier, "Stop"))
+                return new StopNode();
             else
                 return ExpressionNode.Parse(parser);
         }

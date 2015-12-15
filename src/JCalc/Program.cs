@@ -13,18 +13,18 @@ namespace JCalc
     {
         static void Main(string[] args)
         {
-            Interpreter.Interpreter interpreter = new Interpreter.Interpreter();
-
+            JCalcEngine engine = new JCalcEngine();
             if (args.Length <= 0)
-            {
-                while (true)
-                {
-                    string input = Console.ReadLine();
-                    interpreter.Execute(new Parser.Parser(new Lexer.Lexer(input).Scan()).Parse());
-                }
-            }
+                engine.ExecuteREPL("\n>>> ");
             else
-                interpreter.Execute(new Parser.Parser(new Lexer.Lexer(File.ReadAllText(args[0])).Scan()).Parse(), false);
+                try
+                {
+                    engine.ExecuteSource(File.ReadAllText(args[0]));
+                }
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine("File " + args[0] + " was not found!");
+                }
         }
     }
 }
