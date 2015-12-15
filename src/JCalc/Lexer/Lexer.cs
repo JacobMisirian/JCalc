@@ -80,6 +80,9 @@ namespace JCalc.Lexer
                             else
                                 result.Add(new Token(TokenType.Comparison, "!"));
                             break;
+                        case "#":
+                            scanComment();
+                            break;
                         default:
                             Console.WriteLine("Unknown token " + readLetter);
                             break;
@@ -130,6 +133,12 @@ namespace JCalc.Lexer
             if (position < code.Length)
                 return code[position++];
             return -1;
+        }
+
+        private void scanComment()
+        {
+            while (peekChar() != -1 && peekLetter != "\n")
+                readChar();
         }
     }
 }

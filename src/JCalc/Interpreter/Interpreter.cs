@@ -20,6 +20,7 @@ namespace JCalc.Interpreter
         {
             {"True", true },
             {"False", false },
+            {"Null", null },
             {"Pi", Math.PI }
         };
 
@@ -66,7 +67,7 @@ namespace JCalc.Interpreter
                 foreach (AstNode cnode in node.Children[0].Children)
                 {
                     if (!(cnode is IdentifierNode))
-                        throw new Exception("Identifier variables must follow Input");
+                        throw new Exception("Identifier variables must follow Input!");
                     IdentifierNode inode = (IdentifierNode)cnode;
                     if (Variables.ContainsKey(inode.Identifier))
                         Variables.Remove(inode.Identifier);
@@ -81,10 +82,31 @@ namespace JCalc.Interpreter
                     }
                 }
             }
+            else if (node is PromptNode)
+            {
+                foreach (AstNode cnode in node.Children[0].Children)
+                {
+                    if (!(cnode is IdentifierNode))
+                        throw new Exception("Identifier variables must follow Prompt!");
+                    IdentifierNode inode = (IdentifierNode)cnode;
+                    if (Variables.ContainsKey(inode.Identifier))
+                        Variables.Remove(inode.Identifier);
+                    Console.Write(inode.Identifier + "? ");
+                    string input = Console.ReadLine();
+                    try
+                    {
+                        Variables.Add(inode.Identifier, Convert.ToDouble(input));
+                    }
+                    catch (FormatException ex)
+                    {
+                        Variables.Add(inode.Identifier, input);
+                    }
+                }
+            }
             else
                 evaluateNode(node);
         }
-
+        
         private object evaluateNode(AstNode node, bool pushToStack = true)
         {
             if (node is IdentifierNode)

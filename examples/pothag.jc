@@ -1,0 +1,5 @@
+# Get A and B which are the two side lengths.
+Prompt A
+Prompt B
+# Display the square root of A squared plus B squared.
+Disp Sqrt(A^2 + B^2)
