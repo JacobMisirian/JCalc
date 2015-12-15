@@ -70,7 +70,15 @@ namespace JCalc.Interpreter
                     IdentifierNode inode = (IdentifierNode)cnode;
                     if (Variables.ContainsKey(inode.Identifier))
                         Variables.Remove(inode.Identifier);
-                    Variables.Add(inode.Identifier, Console.ReadLine());
+                    string input = Console.ReadLine();
+                    try
+                    {
+                        Variables.Add(inode.Identifier, Convert.ToDouble(input));
+                    }
+                    catch (FormatException ex)
+                    {
+                        Variables.Add(inode.Identifier, input);
+                    }
                 }
             }
             else
