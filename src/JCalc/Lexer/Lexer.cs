@@ -30,6 +30,9 @@ namespace JCalc.Lexer
                 else
                     switch (peekLetter)
                     {
+                        case "^":
+                            result.Add(new Token(TokenType.Operation, readLetter));
+                            break;
                         case ",":
                             result.Add(new Token(TokenType.Comma, readLetter));
                             break;

@@ -155,6 +155,8 @@ namespace JCalc.Interpreter
                     return Convert.ToDouble(evaluateNode(node.Left)) * Convert.ToDouble(evaluateNode(node.Right));
                 case BinaryOperation.Modulus:
                     return Convert.ToDouble(evaluateNode(node.Left)) % Convert.ToDouble(evaluateNode(node.Right));
+                case BinaryOperation.Exponent:
+                    return Math.Pow(Convert.ToDouble(evaluateNode(node.Left)), Convert.ToDouble(evaluateNode(node.Right)));
                 case BinaryOperation.Equals:
                     return evaluateNode(node.Left).GetHashCode() == evaluateNode(node.Right).GetHashCode();
                 case BinaryOperation.Not:

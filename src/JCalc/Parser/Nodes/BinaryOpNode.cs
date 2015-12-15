@@ -19,7 +19,8 @@ namespace JCalc.Parser.Nodes
         LessThan,
         GreaterThanOrEqual,
         LesserThanOrEqual,
-        Not
+        Not,
+        Exponent
     }
 
     public class BinaryOpNode: AstNode

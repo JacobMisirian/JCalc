@@ -65,6 +65,10 @@ namespace JCalc.Parser.Nodes
                         parser.AcceptToken(TokenType.Operation);
                         left = new BinaryOpNode(BinaryOperation.Division, left, parseComparison(parser));
                         continue;
+                    case "^":
+                        parser.AcceptToken(TokenType.Operation);
+                        left = new BinaryOpNode(BinaryOperation.Exponent, left, parseComparison(parser));
+                        continue;
                     case "%":
                         parser.AcceptToken(TokenType.Operation);
                         left = new BinaryOpNode(BinaryOperation.Modulus, left, parseComparison(parser));
