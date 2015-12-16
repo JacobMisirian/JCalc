@@ -140,6 +140,15 @@ namespace JCalc.Parser.Nodes
         {
             if (parser.MatchToken(TokenType.String))
                 return new StringNode(parser.ExpectToken(TokenType.String).Value);
+            else if (parser.AcceptToken(TokenType.Brace, "{"))
+            {
+                CodeBlockNode block = new CodeBlockNode();
+                while (!parser.EndOfStream && !parser.MatchToken(TokenType.Brace, "}"))
+                    block.Children.Add(StatementNode.Parse(parser));
+                parser.ExpectToken(TokenType.Brace, "}");
+
+                return block;
+            }
             else if (parser.AcceptToken(TokenType.Comparison, "!"))
                 return new UnaryOpNode(UnaryOperation.Not, ExpressionNode.Parse(parser));
             else if (parser.MatchToken(TokenType.Number))

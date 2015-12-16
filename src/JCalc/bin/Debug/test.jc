@@ -1,0 +1,11 @@
+Disp "Enter > 10:"
+Input X
+If X > 10 {
+	Disp "Good job!"
+	Disp "You entered a number greater than 10!"
+} Else {
+	Disp "Bad!"
+	Disp "You entered a number less than or equal to 10"
+}
+
+Disp "You entered: " + X

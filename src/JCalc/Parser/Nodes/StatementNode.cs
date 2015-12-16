@@ -12,7 +12,9 @@ namespace JCalc.Parser.Nodes
     {
         public static AstNode Parse(Parser parser)
         {
-            if (parser.AcceptToken(TokenType.Identifier, "Disp"))
+            if (parser.AcceptToken(TokenType.Identifier, "If"))
+                return IfNode.Parse(parser);
+            else if (parser.AcceptToken(TokenType.Identifier, "Disp"))
                 return new DispNode(ArgListNode.Parse(parser));
             else if (parser.AcceptToken(TokenType.Identifier, "Input"))
                 return new InputNode(ArgListNode.Parse(parser));

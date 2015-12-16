@@ -56,6 +56,16 @@ namespace JCalc.Interpreter
             if (node is CodeBlockNode)
                 foreach (AstNode cnode in node.Children)
                     executeStatement(cnode);
+            else if (node is IfNode)
+            {
+                IfNode inode = (IfNode)node;
+                bool execute = (bool)evaluateNode(inode.Predicate);
+                try { stack.Pop(); } catch { }
+                if (execute)
+                    executeStatement(inode.Body);
+                else if (inode.Children.Count == 3)
+                    executeStatement(inode.ElseBody);
+            }
             else if (node is DispNode)
             {
                 foreach (AstNode cnode in node.Children[0].Children)

@@ -15,7 +15,8 @@ namespace JCalc.Lexer
         Comparison,
         Assignment,
         Parentheses,
-        Comma
+        Comma,
+        Brace
     }
 
     public class Token

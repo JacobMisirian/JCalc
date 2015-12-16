@@ -46,6 +46,10 @@ namespace JCalc.Lexer
                             else
                                 result.Add(new Token(TokenType.Operation, "-"));
                             break;
+                        case "{":
+                        case "}":
+                            result.Add(new Token(TokenType.Brace, readLetter));
+                            break;
                         case "+":
                         case "*":
                         case "/":
