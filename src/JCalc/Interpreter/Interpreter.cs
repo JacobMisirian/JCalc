@@ -21,7 +21,8 @@ namespace JCalc.Interpreter
             {"True", true },
             {"False", false },
             {"Null", null },
-            {"Pi", Math.PI }
+            {"Pi", Math.PI },
+            {"E", Math.E } 
         };
 
         public Interpreter(AstNode ast = null)

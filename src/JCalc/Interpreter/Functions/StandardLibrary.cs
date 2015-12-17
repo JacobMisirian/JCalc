@@ -15,12 +15,16 @@ namespace JCalc.Interpreter.Functions
             var result = new Dictionary<string, InternalFunction>();
 
             result.Add("Abs", new InternalFunction(Abs));
+            result.Add("Tan", new InternalFunction(Tan));
             result.Add("ATan", new InternalFunction(ATan));
             result.Add("Cos", new InternalFunction(Cos));
+            result.Add("ACos", new InternalFunction(ACos));
             result.Add("Exp", new InternalFunction(Exp));
             result.Add("Log", new InternalFunction(Log));
+            result.Add("Log10", new InternalFunction(Log10));
             result.Add("Rand", new InternalFunction(Rand));
             result.Add("Sin", new InternalFunction(Sin));
+            result.Add("ASin", new InternalFunction(ASin));
             result.Add("Sqrt", new InternalFunction(Sqrt));
 
             return result;
@@ -29,6 +33,11 @@ namespace JCalc.Interpreter.Functions
         private static object Abs(object[] args)
         {
             return Convert.ToDouble(Math.Abs(Convert.ToDouble(args[0])));
+        }
+
+        private static object Tan(object[] args)
+        {
+            return Math.Tan(Convert.ToDouble(args[0]));
         }
 
         private static object ATan(object[] args)
@@ -41,6 +50,11 @@ namespace JCalc.Interpreter.Functions
             return Math.Cos(Convert.ToDouble(args[0]));
         }
 
+        private static object ACos(object[] args)
+        {
+            return Math.Acos(Convert.ToDouble(args[0]));
+        }
+
         private static object Exp(object[] args)
         {
             return Math.Exp(Convert.ToDouble(args[0]));
@@ -49,6 +63,11 @@ namespace JCalc.Interpreter.Functions
         private static object Log(object[] args)
         {
             return Math.Log(Convert.ToDouble(args[0]));
+        }
+
+        private static object Log10(object[] args)
+        {
+            return Math.Log10(Convert.ToDouble(args[0]));
         }
 
         private static object Rand(object[] args)
@@ -64,6 +83,11 @@ namespace JCalc.Interpreter.Functions
         private static object Sin(object[] args)
         {
             return Math.Sin(Convert.ToDouble(args[0]));
+        }
+
+        private static object ASin(object[] args)
+        {
+            return Math.Asin(Convert.ToDouble(args[0]));
         }
 
         private static object Sqrt(object[] args)
