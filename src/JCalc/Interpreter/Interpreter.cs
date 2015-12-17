@@ -51,11 +51,11 @@ namespace JCalc.Interpreter
                 stack.Pop();
         }
 
-        private void executeStatement(AstNode node)
+        private void executeStatement(AstNode node, bool pushToStack = true)
         {
             if (node is CodeBlockNode)
                 foreach (AstNode cnode in node.Children)
-                    executeStatement(cnode);
+                    executeStatement(cnode, pushToStack);
             else if (node is IfNode)
             {
                 IfNode inode = (IfNode)node;
@@ -65,6 +65,11 @@ namespace JCalc.Interpreter
                     executeStatement(inode.Body);
                 else if (inode.Children.Count == 3)
                     executeStatement(inode.ElseBody);
+            }
+            else if (node is WhileNode)
+            {
+                while ((bool)evaluateNode(node.Children[0], false))
+                    executeStatement(node.Children[1], false);
             }
             else if (node is DispNode)
             {
@@ -116,7 +121,7 @@ namespace JCalc.Interpreter
             else if (node is StopNode)
                 Environment.Exit(0);
             else
-                evaluateNode(node);
+                evaluateNode(node, pushToStack);
         }
         
         private object evaluateNode(AstNode node, bool pushToStack = true)

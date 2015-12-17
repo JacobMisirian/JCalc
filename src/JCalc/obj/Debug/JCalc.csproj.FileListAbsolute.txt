@@ -10,3 +10,11 @@ C:\Users\Reagan\JCalc\src\JCalc\obj\Debug\JCalc.pdb
 C:\Users\Reagan\JCalc\src\JCalc\bin\Debug\JCalc.exe
 C:\Users\Reagan\JCalc\src\JCalc\bin\Debug\JCalc.pdb
 C:\Users\Reagan\JCalc\src\JCalc\obj\Debug\JCalc.csprojResolveAssemblyReference.cache
+C:\Users\misiriaj\JCalc\src\JCalc\bin\Debug\JCalc.exe.config
+C:\Users\misiriaj\JCalc\src\JCalc\obj\Debug\JCalc.exe
+C:\Users\misiriaj\JCalc\src\JCalc\obj\Debug\JCalc.pdb
+C:\Users\misiriaj\JCalc\src\JCalc\bin\Debug\JCalc.exe
+C:\Users\misiriaj\JCalc\src\JCalc\bin\Debug\JCalc.pdb
+C:\Users\misiriaj\JCalc\src\JCalc\bin\Debug\System.Net.Http.dll
+C:\Users\misiriaj\JCalc\src\JCalc\bin\Debug\System.Net.Http.xml
+C:\Users\misiriaj\JCalc\src\JCalc\obj\Debug\JCalc.csprojResolveAssemblyReference.cache

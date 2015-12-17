@@ -14,6 +14,8 @@ namespace JCalc.Parser.Nodes
         {
             if (parser.AcceptToken(TokenType.Identifier, "If"))
                 return IfNode.Parse(parser);
+            else if (parser.AcceptToken(TokenType.Identifier, "While"))
+                return WhileNode.Parse(parser);
             else if (parser.AcceptToken(TokenType.Identifier, "Disp"))
                 return new DispNode(ArgListNode.Parse(parser));
             else if (parser.AcceptToken(TokenType.Identifier, "Input"))
