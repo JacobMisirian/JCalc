@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +60,7 @@
     <Compile Include="Parser\Nodes\CodeBlockNode.cs" />
     <Compile Include="Parser\Nodes\DispNode.cs" />
     <Compile Include="Parser\Nodes\ExpressionNode.cs" />
+    <Compile Include="Parser\Nodes\ForNode.cs" />
     <Compile Include="Parser\Nodes\FunctionCallNode.cs" />
     <Compile Include="Parser\Nodes\IdentifierNode.cs" />
     <Compile Include="Parser\Nodes\IfNode.cs" />

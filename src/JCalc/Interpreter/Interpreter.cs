@@ -72,6 +72,16 @@ namespace JCalc.Interpreter
                 while ((bool)evaluateNode(node.Children[0], false))
                     executeStatement(node.Children[1], false);
             }
+            else if (node is ForNode)
+            {
+                ForNode fnode = (ForNode)node;
+                executeStatement(fnode.FirstStatement, false);
+                while ((bool)evaluateNode(fnode.Predicate, false))
+                {
+                    executeStatement(fnode.RepeatStatement, false);
+                    executeStatement(fnode.Body, false);
+                }
+            }
             else if (node is DispNode)
             {
                 foreach (AstNode cnode in node.Children[0].Children)
