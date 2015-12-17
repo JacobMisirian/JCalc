@@ -16,6 +16,7 @@ namespace JCalc.Interpreter
         private int position = 0;
         private AstNode code { get; set; }
         private Stack stack = new Stack();
+        public Dictionary<string, int> Labels = new Dictionary<string, int>();
         public Dictionary<string, object> Variables = new Dictionary<string, object>()
         {
             {"True", true },
@@ -36,6 +37,7 @@ namespace JCalc.Interpreter
         public void Execute(AstNode ast = null, bool displayLastCalculation = true)
         {
             code = (ast == null) ? code : ast;
+            addLabels();
             for (position = 0; position < code.Children.Count; position++)
                 executeStatement(code.Children[position]);
 
@@ -81,6 +83,15 @@ namespace JCalc.Interpreter
                     executeStatement(fnode.RepeatStatement, false);
                     executeStatement(fnode.Body, false);
                 }
+            }
+            else if (node is LabelNode)
+                return;
+            else if (node is GotoNode)
+            {
+                string label = ((GotoNode)node).Identifier;
+                if (!Labels.ContainsKey(label))
+                    throw new Exception("Label " + label + " was not found in the dictionary!");
+                position = Labels[label];
             }
             else if (node is DispNode)
             {
@@ -261,6 +272,16 @@ namespace JCalc.Interpreter
                 }
 
             return result;
+        }
+
+        private void addLabels()
+        {
+            for (int pointer = 0; pointer < code.Children.Count; pointer++)
+            {
+                AstNode currentNode = code.Children[pointer];
+                if (currentNode is LabelNode)
+                    Labels.Add(((LabelNode)currentNode).Identifier, pointer);
+            }
         }
     }
 }
