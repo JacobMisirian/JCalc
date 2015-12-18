@@ -88,3 +88,28 @@ Rand()				|  Returns the next double from the random generator.
 Rand(x)				|  Returns the next double from the random generator with an uppper bound of x.
 Rand(x, y)			|  Returns a random number between x and y.
 
+## Variables
+
+You can assign values to any variable you would like to. Variables can be any series of
+letters and numbers that does not start with a number. The syntax for assigning variables
+is:
+```
+<value> -> <variable>
+```
+
+On the REPL let's assign some variables and then use them.
+```
+>>> Sqrt(64) -> x
+8
+
+>>> x + 5 -> x
+13
+
+>>> 3 -> y
+3
+
+>>> y * x
+39
+
+>>>
+```
