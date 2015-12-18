@@ -43,3 +43,48 @@ Operator		|  Description
 >=			|  Returns true if the left side is greater than or equal to the right.
 <=			|  Returns true if the left side is lesser than or equal to the right.
 
+Just like a pocket calculator, JCalc follows the PEMDAS operator precedence. Take this:
+```
+>>> 4 + 5 * 8
+44
+
+>>> (4 + 5) * 8
+72
+
+>>>
+```
+
+The ()s take precedence over other operations and the * operator takes precedence over the + operator.
+
+## Built in Functions
+
+Just like the Ti-83s we all know and love, JCalc has functions built in to it that make
+it easy to do advanced mathematical computation. Here is an example showing the Square
+Root function being used on the constant 64 and to calculate the Pythagorean Theorem:
+```
+>>> Sqrt(64)
+8
+
+>>> Sqrt(4^2 + 3^2)
+5
+```
+
+Here is a documentation style table of the built in functions in JCalc:
+
+Function			|  Description
+------------------------------  |  -----------
+Sqrt(x)				|  Returns the square root of x.
+Abs(x)				|  Returns the absolute value of x.
+Tan(x)				|  Returns the tangent of x.
+ATan(x)				|  Returns the arctangent of x.
+Cos(x)				|  Returns the cosine of x.
+ACos(x)				|  Returns the arccosine of x.
+Sin(x)				|  Returns the sine of x.
+ASin(x)				|  Returns the arcsin of x.
+Exp(x)				|  Returns e to the power of x.
+Log(x)				|  Returns the logarithmic value of x.
+Log10(x)			|  Returns the natural logarithmic value of x.
+Rand()				|  Returns the next double from the random generator.
+Rand(x)				|  Returns the next double from the random generator with an uppper bound of x.
+Rand(x, y)			|  Returns a random number between x and y.
+
